@@ -1,0 +1,359 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    background-color: #f2eddb;
+    color: #252525;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom Cursor Rules (only on devices with a mouse) */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active body,
+  html.custom-cursor-active button,
+  html.custom-cursor-active a,
+  html.custom-cursor-active [role="button"] {
+    cursor: none !important;
+  }
+  html.custom-cursor-active input,
+  html.custom-cursor-active textarea,
+  html.custom-cursor-active [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
+/* Custom bento styling inspired by Print 3 */
+.bento-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Orange Glow on Hover for Tech Feature Cards */
+.hover-glow-orange {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-glow-orange:hover {
+  border-color: #f47524 !important;
+  box-shadow: 0 0 30px -4px rgba(244, 117, 36, 0.45), 0 0 0 1.5px rgba(244, 117, 36, 0.8) !important;
+  transform: translateY(-3px);
+}
+
+/* Card Hover Float 3px over 3.8s cycle */
+@keyframes cardHoverFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-card-hover-float {
+  animation: cardHoverFloat 3.8s ease-in-out infinite;
+}
+
+/* Pulsing radar glow on featured button */
+@keyframes radarPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 117, 36, 0.65), 0 0 20px rgba(244, 117, 36, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(244, 117, 36, 0), 0 0 28px rgba(244, 117, 36, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 117, 36, 0), 0 0 20px rgba(244, 117, 36, 0.35);
+  }
+}
+
+.animate-radar-pulse {
+  animation: radarPulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Marquee: Left to Right infinite seamless animation */
+@keyframes marqueeLtr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marqueeLtr 25s linear infinite;
+}
+
+.animate-marquee-ltr:hover {
+  animation-play-state: paused;
+}
+
+/* Worm / Snake wave stroke animation */
+@keyframes wormFlow {
+  0% {
+    stroke-dashoffset: 260;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -260;
+  }
+}
+
+@keyframes wormWiggle {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.03) translateY(-2px);
+  }
+}
+
+.worm-line-1 {
+  stroke-dasharray: 70 140;
+  animation: wormFlow 3.5s ease-in-out infinite;
+}
+
+.worm-line-2 {
+  stroke-dasharray: 60 130;
+  animation: wormFlow 3.5s ease-in-out infinite 0.45s;
+}
+
+.worm-line-3 {
+  stroke-dasharray: 50 120;
+  animation: wormFlow 3.5s ease-in-out infinite 0.9s;
+}
+
+.group:hover .worm-line-1,
+.group:hover .worm-line-2,
+.group:hover .worm-line-3 {
+  animation-duration: 1.8s;
+}
+
+/* Atom / Solar System Orbit Animations */
+@keyframes orbitRotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitRotateReverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes atomPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px rgba(244, 117, 36, 0.5));
+  }
+  50% {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 14px rgba(244, 117, 36, 0.9));
+  }
+}
+
+.orbit-1 {
+  transform-origin: 90px 60px;
+  animation: orbitRotateSlow 9s linear infinite;
+}
+
+.orbit-2 {
+  transform-origin: 90px 60px;
+  animation: orbitRotateReverse 14s linear infinite;
+}
+
+.orbit-3 {
+  transform-origin: 90px 60px;
+  animation: orbitRotateSlow 6s linear infinite;
+}
+
+.atom-core {
+  transform-origin: 90px 60px;
+  animation: atomPulse 2.8s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #eee1c5;
+}
+::-webkit-scrollbar-thumb {
+  background: #252525;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f47524;
+}
+
+/* ==========================================================================
+   Theme Variables & Transitions (Light / Dark Mode)
+   ========================================================================== */
+
+/* Smooth color transitions between themes */
+html,
+body,
+nav,
+div,
+section,
+button,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+a {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body,
+  nav,
+  div,
+  section,
+  button,
+  span,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  a {
+    transition: none !important;
+  }
+}
+
+/* Dark Mode Theme Overrides */
+html.dark body {
+  background-color: #121310 !important;
+  color: #F4F0E5 !important;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Surfaces */
+html.dark .bg-cream-100,
+html.dark .bg-cream-50 {
+  background-color: #20211D !important;
+}
+
+html.dark .bg-sand,
+html.dark .bg-cream-200,
+html.dark .bg-cream-100\/80,
+html.dark .bg-cream-100\/90,
+html.dark .bg-cream-100\/95 {
+  background-color: #25261F !important;
+}
+
+/* Dark cards & surfaces in dark mode remain subtle graphite */
+html.dark .bg-charcoal {
+  background-color: #181914 !important;
+}
+
+html.dark .bg-charcoal-dark {
+  background-color: #121310 !important;
+}
+
+html.dark .bg-charcoal-light {
+  background-color: #20211D !important;
+}
+
+/* White elements in dark mode switch to elevated surface */
+html.dark .bg-white,
+html.dark .bg-white\/70,
+html.dark .bg-white\/80,
+html.dark .bg-white\/90,
+html.dark .bg-white\/95 {
+  background-color: #25261F !important;
+  color: #F4F0E5 !important;
+}
+
+/* Texts */
+html.dark .text-charcoal {
+  color: #F4F0E5 !important;
+}
+
+html.dark .text-charcoal\/90,
+html.dark .text-charcoal\/85,
+html.dark .text-charcoal\/80,
+html.dark .text-charcoal\/75,
+html.dark .text-charcoal\/70 {
+  color: #B6B2A5 !important;
+}
+
+html.dark .text-charcoal\/60,
+html.dark .text-charcoal\/50,
+html.dark .text-charcoal\/40 {
+  color: rgba(182, 178, 165, 0.65) !important;
+}
+
+/* Borders */
+html.dark .border-cream-300,
+html.dark .border-cream-400,
+html.dark .border-cream-500,
+html.dark .border-charcoal-border,
+html.dark .border-charcoal\/25 {
+  border-color: #393A31 !important;
+}
+
+html.dark .border-white\/50,
+html.dark .border-white\/60,
+html.dark .border-white\/40 {
+  border-color: #393A31 !important;
+}
+
+/* Preserve Brand Accents in Dark Mode */
+html.dark .bg-brand {
+  background-color: #f47524 !important;
+  color: #ffffff !important;
+}
+
+html.dark .bg-\[\#C8FF2F\] {
+  background-color: #C8FF2F !important;
+  color: #121310 !important;
+}
+
+html.dark .text-brand {
+  color: #f47524 !important;
+}
+
+/* Navbar & Glass in Dark Mode */
+html.dark nav {
+  background-color: rgba(32, 33, 29, 0.65) !important;
+  border-color: #393A31 !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Scrollbar in Dark Mode */
+html.dark ::-webkit-scrollbar-track {
+  background: #121310;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #393A31;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #f47524;
+}
